@@ -1,14 +1,20 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <nav class="navbar">
+      <router-link to="/">Home</router-link>
+      <router-link to="/todo-list">Todo List</router-link>
+      <router-link to="/todo-create">Todo Create</router-link>
+      <router-link to="/todo-edit">Todo Edit</router-link>
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style lang="scss">
+* {
+  padding: 0;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -16,17 +22,37 @@
   text-align: center;
   color: #2c3e50;
 }
-
-nav {
-  padding: 30px;
-
+.navbar {
+  padding: 15px 0;
+  background: #ef9a53;
   a {
-    font-weight: bold;
-    color: #2c3e50;
-
+    font-weight: 500;
+    color: #fff;
+    padding: 0px 10px;
+    text-decoration: none;
+    letter-spacing: 1.1px;
     &.router-link-exact-active {
-      color: #42b983;
+      color: #222;
     }
   }
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-remove {
+  padding: 5px 10px;
+  background: #dc3535;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.btn-submit {
+  padding: 5px 10px;
+  background: #5f8d4e;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
 </style>

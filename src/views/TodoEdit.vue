@@ -5,7 +5,7 @@
 <script>
 
 export default {
-  name: 'HomeView',
+  name: 'TodoEdit',
   components: {}
 }
 </script>
