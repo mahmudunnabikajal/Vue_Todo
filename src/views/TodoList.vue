@@ -3,17 +3,20 @@
     <div class="todo-list flex-center">
       <table border="1">
         <tr>
+          <th>Id</th>
           <th>Title</th>
           <th>Comment</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
         <tr v-for="(item,index) in todos" :key="index">
+          <td>{{item.id}}</td>
           <td>{{item.title}}</td>
           <td>{{item.comment}}</td>
           <td>{{item.status}}</td>
           <td>
-            <button class="btn-remove" @click="remove(index)">Remove</button>
+            <button class="btn-remove" @click="todoRemove(index)">Edit</button>
+            <button class="btn-remove" @click="todoRemove(index)">Remove</button>
           </td>
         </tr>
       </table>
@@ -31,11 +34,19 @@ export default {
   },
   components: {},
   created() {
-    this.getTodo()
+    this.todoGet()
   },
   methods: {
-    getTodo() {
+    todoGet() {
       this.todos = JSON.parse(localStorage.getItem("todolist"));
+    },
+    todoRemove(item) {
+      this.todos.splice(item, 1);
+      this.todoSubmit()
+    },
+    todoSubmit() {
+      let newTodoStringify = JSON.stringify(this.todos);
+      localStorage.setItem("todolist", newTodoStringify);
     }
   }
 }

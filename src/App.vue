@@ -43,13 +43,23 @@
 }
 .btn-remove {
   padding: 5px 10px;
+  margin: 0 5px;
   background: #dc3535;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.btn-edit {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background: #35b5dc;
   color: #fff;
   border: none;
   cursor: pointer;
 }
 .btn-submit {
   padding: 5px 10px;
+  margin: 0 5px;
   background: #5f8d4e;
   color: #fff;
   border: none;
