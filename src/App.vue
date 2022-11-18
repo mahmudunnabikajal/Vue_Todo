@@ -1,15 +1,14 @@
 <template>
   <div id="app">
     <nav class="navbar">
-      <router-link to="/">Home</router-link>
-      <router-link to="/todo-list">Todo List</router-link>
-      <router-link to="/todo-create">Todo Create</router-link>
-      <router-link to="/todo-edit">Todo Edit</router-link>
+      <router-link :to="{ name:'home' }">Home</router-link>
+      <router-link :to="{ name:'todo-list' }">Todo List</router-link>
+      <router-link :to="{ name:'todo-create' }">Todo Create</router-link>
+      <!-- <router-link :to="{ name:'todo-edit' ,params:{id:1 }">Todo Edit</router-link> -->
     </nav>
     <router-view />
   </div>
 </template>
-
 <style lang="scss">
 * {
   padding: 0;
@@ -40,6 +39,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .btn-remove {
   padding: 5px 10px;
@@ -48,6 +48,7 @@
   color: #fff;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 .btn-edit {
   padding: 5px 10px;
@@ -56,6 +57,7 @@
   color: #fff;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 .btn-submit {
   padding: 5px 10px;
@@ -64,5 +66,6 @@
   color: #fff;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 </style>
