@@ -61,6 +61,7 @@ export default {
           status: "Pending",
         }
       } else {
+        this.todos = []
         this.todos.push({
           id: this.newTodo.id,
           title: this.newTodo.title,
