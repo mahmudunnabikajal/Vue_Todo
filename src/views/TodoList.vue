@@ -52,7 +52,7 @@ export default {
     return {
       todos: [],
       filterStatus: "All",
-      searchItem: "",
+      searchItem: '',
       alertToaster: null,
       alertVisible: true
     }
