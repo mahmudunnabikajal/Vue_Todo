@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AlertToastr :type="this.alertToaster" v-show="alertVisible"></AlertToastr>
     <h2>Todo List</h2>
     <div class="todo-list flex-center">
       <div class="filter">
@@ -32,7 +33,7 @@
           <td>{{item.status}}</td>
           <td>
             <router-link class="btn-edit" :to="{ name:'todo-edit', params:{id:item.id} }">Edit</router-link>
-            <button class="btn-remove" @click="todoRemove(index)">Remove</button>
+            <button class="btn-remove" @click="todoRemove(index)" v-if="filterStatus == 'All'">Remove</button>
           </td>
         </tr>
         <tr v-if="!todos || todos.length == 0">
@@ -44,26 +45,35 @@
 </template>
 
 <script>
+import AlertToastr from "@/components/AlertToastr.vue"
 export default {
   name: 'TodoList',
   data() {
     return {
       todos: [],
       filterStatus: "All",
-      searchItem: ""
+      searchItem: "",
+      alertToaster: null,
+      alertVisible: true
     }
   },
-  components: {},
+  components: { AlertToastr },
   created() {
     this.todoGet()
   },
   methods: {
+    alertRemove() {
+      setTimeout(() => this.alertVisible = false, 2000)
+      this.alertVisible = true
+    },
     todoGet() {
       this.todos = JSON.parse(localStorage.getItem("todolist"));
     },
     todoRemove(item) {
       this.todos.splice(item, 1);
       this.todoSubmit()
+      this.alertToaster = "success"
+      this.alertRemove()
     },
     todoSubmit() {
       let newTodoStringify = JSON.stringify(this.todos);

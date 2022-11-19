@@ -1,6 +1,8 @@
 <template>
   <div>
+    <AlertToastr :type="this.alertToaster" v-show="alertVisible"></AlertToastr>
     <h2>Todo Edit</h2>
+    <p>Data Push Hoy But Id wise filter kore update hoyna</p>
     <div class="todo-create flex-center">
       <form @submit.prevent="updateTodo">
         <input class="form-control" type="text" v-model="editTodo.id" disabled required />
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+import AlertToastr from "@/components/AlertToastr.vue"
 export default {
   name: 'TodoEdit',
   data() {
@@ -30,15 +33,21 @@ export default {
         title: null,
         comment: null,
         status: "Pending",
-      }
+      },
+      alertToaster: null,
+      alertVisible: true
     }
   },
-  components: {},
+  components: { AlertToastr },
   created() {
     this.todoGet()
     this.todoGetById()
   },
   methods: {
+    alertRemove() {
+      setTimeout(() => this.alertVisible = false, 2000)
+      this.alertVisible = true
+    },
     todoGet() {
       this.todos = JSON.parse(localStorage.getItem("todolist"));
     },
@@ -57,6 +66,8 @@ export default {
         })
       }
       this.todoSubmit()
+      this.alertToaster = "success"
+      this.alertRemove()
     },
     todoSubmit() {
       let newTodoStringify = JSON.stringify(this.todos);

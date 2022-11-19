@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AlertToastr :type="this.alertToaster" v-show="alertVisible"></AlertToastr>
     <h2>Todo Create</h2>
     <div class="todo-create flex-center">
       <form @submit.prevent="todoAdd">
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import AlertToastr from "@/components/AlertToastr.vue"
 export default {
   name: 'TodoCreate',
   data() {
@@ -29,15 +31,21 @@ export default {
         title: null,
         comment: null,
         status: "Pending",
-      }
+      },
+      alertToaster: null,
+      alertVisible: true
     }
   },
-  components: {},
+  components: { AlertToastr },
   created() {
     this.todoGet()
     this.todoIdGenerate()
   },
   methods: {
+    alertRemove() {
+      setTimeout(() => this.alertVisible = false, 2000)
+      this.alertVisible = true
+    },
     todoGet() {
       this.todos = JSON.parse(localStorage.getItem("todolist"));
     },
@@ -62,6 +70,8 @@ export default {
       }
       this.todoIdGenerate()
       this.todoSubmit()
+      this.alertToaster = "success"
+      this.alertRemove()
     },
     todoSubmit() {
       let newTodoStringify = JSON.stringify(this.todos);
