@@ -55,11 +55,6 @@ export default {
     todoAdd() {
       if (!this.todos == []) {
         this.todos.push(this.newTodo)
-        this.newTodo = {
-          title: null,
-          comment: null,
-          status: "Pending",
-        }
       } else {
         this.todos = []
         this.todos.push({
@@ -68,6 +63,11 @@ export default {
           comment: this.newTodo.comment,
           status: this.newTodo.status,
         })
+      }
+      this.newTodo = {
+        title: null,
+        comment: null,
+        status: "Pending",
       }
       this.todoIdGenerate()
       this.todoSubmit()
