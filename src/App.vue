@@ -41,6 +41,10 @@
   align-items: center;
   flex-direction: column;
 }
+.form-control {
+  padding: 10px;
+  margin: 5px;
+}
 .btn-remove {
   padding: 5px 10px;
   margin: 0 5px;

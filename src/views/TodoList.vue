@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Todo List</h2>
     <div class="todo-list flex-center">
       <div class="filter">
         <div class="d-flex">
@@ -13,7 +14,7 @@
         </div>
         <div class="d-flex">
           <p>Search By Title</p>
-          <input type="text" v-model="searchItem" placeholder="Search Here" @keyup="filter()" />
+          <input class="form-control" type="text" v-model="searchItem" placeholder="Search Here" @keyup="filter()" />
         </div>
       </div>
       <table border="1">
@@ -74,10 +75,8 @@ export default {
           return item.status == this.filterStatus
         })
       }
-      console.log(this.todos)
     },
     searchByInput() {
-      console.log(this.searchItem)
       if (this.searchItem != "") {
         this.todos = this.todos.filter(item => {
           return item.title == this.searchItem
@@ -96,6 +95,7 @@ export default {
 <style lang="scss" scoped>
 .d-flex {
   display: flex;
+  align-items: center;
 }
 .filter {
   margin: 10px;

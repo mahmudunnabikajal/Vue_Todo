@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Todo Create</h2>
     <div class="todo-create flex-center">
       <form @submit.prevent="todoAdd">
         <input class="form-control" type="text" v-model="newTodo.id" disabled required />
@@ -18,7 +19,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'TodoCreate',
   data() {
@@ -59,7 +59,6 @@ export default {
         objTodo.title = this.newTodo.title
         objTodo.comment = this.newTodo.comment
         objTodo.status = this.newTodo.status
-        objTodo.date = this.newTodo.date
         this.todos.push(objTodo)
       }
       this.todoIdGenerate()
@@ -73,8 +72,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.form-control {
-  padding: 10px;
-  margin: 5px;
-}
 </style>
