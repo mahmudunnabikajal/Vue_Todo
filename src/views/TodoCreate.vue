@@ -53,13 +53,12 @@ export default {
           status: "Pending",
         }
       } else {
-        this.todos = []
-        let objTodo = {}
-        objTodo.id = this.newTodo.id
-        objTodo.title = this.newTodo.title
-        objTodo.comment = this.newTodo.comment
-        objTodo.status = this.newTodo.status
-        this.todos.push(objTodo)
+        this.todos.push({
+          id: this.newTodo.id,
+          title: this.newTodo.title,
+          comment: this.newTodo.comment,
+          status: this.newTodo.status,
+        })
       }
       this.todoIdGenerate()
       this.todoSubmit()
