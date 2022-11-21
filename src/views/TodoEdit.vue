@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       todoEditId: this.$route.params.id,
+      todoIndex: this.$route.params.index,
       todos: [],
       editTodo: {
         id: null,
@@ -57,17 +58,22 @@ export default {
       })
     },
     updateTodo() {
-      if (this.todoGetById) {
-        this.todos.push({
+      if (this.todoGetById && this.todoIndex) {
+        let indexNumber = this.todoIndex
+        let editTodo = {
           id: this.editTodo.id,
           title: this.editTodo.title,
           comment: this.editTodo.comment,
           status: this.editTodo.status,
-        })
+        }
+        this.todos.splice(indexNumber, 1, editTodo)
+        this.todoSubmit()
+        this.alertToaster = "success"
+        this.alertRemove()
+      } else {
+        this.alertToaster = "error"
+        this.alertRemove()
       }
-      this.todoSubmit()
-      this.alertToaster = "success"
-      this.alertRemove()
     },
     todoSubmit() {
       let newTodoStringify = JSON.stringify(this.todos);

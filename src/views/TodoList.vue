@@ -35,7 +35,7 @@
           <td>{{item.comment}}</td>
           <td>{{item.status}}</td>
           <td>
-            <router-link class="btn-edit" :to="{ name:'todo-edit', params:{id:item.id} }">Edit</router-link>
+            <router-link class="btn-edit" :to="{ name:'todo-edit', params:{id:item.id , index:index} }">Edit</router-link>
             <button class="btn-remove" @click="todoRemove(index)" v-if="searchItem == ''">Remove</button>
           </td>
         </tr>
