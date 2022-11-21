@@ -45,7 +45,8 @@ export default {
     this.todoGetById()
   },
   methods: {
-    alertRemove() {
+    alertInit(status) {
+      this.alertToaster = status
       setTimeout(() => this.alertVisible = false, 2000)
       this.alertVisible = true
     },
@@ -68,11 +69,9 @@ export default {
         }
         this.todos.splice(indexNumber, 1, editTodo)
         this.todoSubmit()
-        this.alertToaster = "success"
-        this.alertRemove()
+        this.alertInit("success")
       } else {
-        this.alertToaster = "error"
-        this.alertRemove()
+        this.alertInit("error")
       }
     },
     todoSubmit() {

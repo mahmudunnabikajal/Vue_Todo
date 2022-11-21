@@ -42,7 +42,8 @@ export default {
     this.todoIdGenerate()
   },
   methods: {
-    alertRemove() {
+    alertInit(status) {
+      this.alertToaster = status
       setTimeout(() => this.alertVisible = false, 2000)
       this.alertVisible = true
     },
@@ -71,8 +72,7 @@ export default {
       }
       this.todoIdGenerate()
       this.todoSubmit()
-      this.alertToaster = "success"
-      this.alertRemove()
+      this.alertInit("success")
     },
     todoSubmit() {
       let newTodoStringify = JSON.stringify(this.todos);

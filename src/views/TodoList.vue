@@ -15,7 +15,7 @@
         </div>
         <div class="d-flex">
           <p>Search By Exact Title</p>
-          <input class="form-control" list="searchByTitle" type="text" v-model="searchItem" placeholder="Search Here" @keyup="filter()" />
+          <input class="form-control" list="searchByTitle" type="text" v-model="searchItem" placeholder="Search Here" @keyup="searchByInput()" />
           <datalist id="searchByTitle">
             <option :value="item.title" v-for="item in todos" :key="item.id">{{ item.title }}</option>
           </datalist>
@@ -65,7 +65,8 @@ export default {
     this.todoGet()
   },
   methods: {
-    alertRemove() {
+    alertInit(status) {
+      this.alertToaster = status
       setTimeout(() => this.alertVisible = false, 2000)
       this.alertVisible = true
     },
@@ -75,23 +76,19 @@ export default {
     todoRemove(item) {
       this.todos.splice(item, 1);
       this.todoSubmit()
-      this.alertToaster = "success"
-      this.alertRemove()
+      this.alertInit("success")
     },
     todoSubmit() {
       let newTodoStringify = JSON.stringify(this.todos);
       localStorage.setItem("todolist", newTodoStringify);
     },
     searchByInput() {
+      this.todoGet()
       if (this.searchItem != "" && this.todos) {
         this.todos = this.todos.filter(item => {
           return item.title == this.searchItem
         })
       }
-    },
-    filter() {
-      this.todoGet()
-      this.searchByInput()
     }
   }
 }
