@@ -6,7 +6,7 @@
       <div class="filter">
         <div class="d-flex">
           <p>Filter by Status</p>
-          <select class="form-control" v-model="filterStatus" required>
+          <select class="form-control" @change="filterStatusItem()" v-model="filterStatus" required>
             <option value="All">All</option>
             <option value="Pending">Pending</option>
             <option value="Running">Running</option>
@@ -39,7 +39,7 @@
             <button class="btn-remove" @click="todoRemove(index)" v-if="searchItem == ''">Remove</button>
           </td>
         </tr>
-        <tr v-if="!todos || todos.length == 0">
+        <tr v-if="!todos || todos.length == 0 || filterStatusTodos.length == 0">
           <td colspan="5">No Data Found</td>
         </tr>
       </table>
@@ -55,6 +55,7 @@ export default {
     return {
       todos: [],
       filterStatus: "All",
+      filterStatusTodos: [],
       searchItem: '',
       alertToaster: null,
       alertVisible: true
@@ -89,6 +90,11 @@ export default {
           return item.title == this.searchItem
         })
       }
+    },
+    filterStatusItem() {
+      this.filterStatusTodos = this.todos.filter(item => {
+        return item.status == this.filterStatus
+      })
     }
   }
 }
