@@ -2,7 +2,6 @@
   <div>
     <AlertToastr :type="this.alertToaster" v-show="alertVisible"></AlertToastr>
     <h2>Todo Edit</h2>
-    <p>Data Push Hoy But Id wise filter kore update hoyna</p>
     <div class="todo-create flex-center">
       <form @submit.prevent="updateTodo">
         <input class="form-control" type="text" v-model="editTodo.id" disabled required />
@@ -59,15 +58,20 @@ export default {
       })
     },
     updateTodo() {
+      let indexNumber = this.todoIndex
+      let editTodo = {
+        id: this.editTodo.id,
+        title: this.editTodo.title,
+        comment: this.editTodo.comment,
+        status: this.editTodo.status,
+      }
       if (this.todoGetById && this.todoIndex) {
-        let indexNumber = this.todoIndex
-        let editTodo = {
-          id: this.editTodo.id,
-          title: this.editTodo.title,
-          comment: this.editTodo.comment,
-          status: this.editTodo.status,
-        }
         this.todos.splice(indexNumber, 1, editTodo)
+        this.todoSubmit()
+        this.alertInit("success")
+      } else if (indexNumber == 0) {
+        this.todos.shift()
+        this.todos.unshift(editTodo)
         this.todoSubmit()
         this.alertInit("success")
       } else {
