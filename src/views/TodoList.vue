@@ -17,7 +17,7 @@
           <p>Search By Exact Title</p>
           <input class="form-control" list="searchByTitle" type="text" v-model="searchItem" placeholder="Search Here" @keyup="searchByInput()" />
           <datalist id="searchByTitle">
-            <option :value="item.title" v-for="item in todos" :key="item.id">{{ item.title }}</option>
+            <option :value="item.title" v-for="item in filterStatusTodos" :key="item.id">{{ item.title }}</option>
           </datalist>
         </div>
       </div>
@@ -39,7 +39,7 @@
             <button class="btn-remove" @click="todoRemove(index)" v-if="searchItem == ''">Remove</button>
           </td>
         </tr>
-        <tr v-if="!todos || todos.length == 0 || filterStatusTodos.length == 0">
+        <tr v-if="!filterStatusTodos.length || !this.todos.length">
           <td colspan="5">No Data Found</td>
         </tr>
       </table>
@@ -64,6 +64,7 @@ export default {
   components: { AlertToastr },
   created() {
     this.todoGet()
+    this.filterStatusItem()
   },
   methods: {
     alertInit(status) {
@@ -92,9 +93,13 @@ export default {
       }
     },
     filterStatusItem() {
-      this.filterStatusTodos = this.todos.filter(item => {
-        return item.status == this.filterStatus
-      })
+      if (this.filterStatus == 'All') {
+        this.filterStatusTodos = this.todos
+      } else {
+        this.filterStatusTodos = this.todos.filter(item => {
+          return item.status == this.filterStatus
+        })
+      }
     }
   }
 }
