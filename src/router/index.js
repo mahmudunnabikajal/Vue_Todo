@@ -31,6 +31,28 @@ const routes = [
         component: () => import('@/views/todo-localstorage/TodoEdit.vue')
       }
     ]
+  },
+  {
+    path: '/todo-localstorage-vuex',
+    name: 'todo-localstorage-vuex',
+    component: () => import('@/views/todo-localstorage-vuex/TodoHome.vue'),
+    children: [
+      {
+        path: 'todo-list',
+        name: 'todo-localstorage-vuex-list',
+        component: () => import('@/views/todo-localstorage-vuex/TodoList.vue')
+      },
+      {
+        path: 'todo-create',
+        name: 'todo-localstorage-vuex-create',
+        component: () => import('@/views/todo-localstorage-vuex/TodoCreate.vue')
+      },
+      {
+        path: 'todo-edit/:index/:id',
+        name: 'todo-localstorage-vuex-edit',
+        component: () => import('@/views/todo-localstorage-vuex/TodoEdit.vue')
+      }
+    ]
   }
 
 ]

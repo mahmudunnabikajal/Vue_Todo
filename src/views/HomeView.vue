@@ -1,10 +1,16 @@
 <template>
   <div>
-    <div class="d-flex">
-      <p>Todo With Localstorage</p>
-      <nav class="navbar">
+    <div>
+      <p>
+        Todo With Localstorage
         <router-link :to="{ name:'todo-localstorage' }">View</router-link>
-      </nav>
+      </p>
+    </div>
+    <div>
+      <p>
+        Todo With Localstorage Vuex
+        <router-link :to="{ name:'todo-localstorage-vuex' }">View</router-link>
+      </p>
     </div>
   </div>
 </template>
