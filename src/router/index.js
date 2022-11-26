@@ -13,17 +13,17 @@ const routes = [
   {
     path: '/todo-list',
     name: 'todo-list',
-    component: () => import('@/views/TodoList.vue')
+    component: () => import('@/views/todo-localstorage/TodoList.vue')
   },
   {
     path: '/todo-create',
     name: 'todo-create',
-    component: () => import('@/views/TodoCreate.vue')
+    component: () => import('@/views/todo-localstorage/TodoCreate.vue')
   },
   {
     path: '/todo-edit/:index/:id',
     name: 'todo-edit',
-    component: () => import('@/views/TodoEdit.vue')
+    component: () => import('@/views/todo-localstorage/TodoEdit.vue')
   }
 ]
 
