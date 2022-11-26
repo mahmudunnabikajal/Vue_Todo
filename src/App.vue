@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-    <nav class="navbar">
-      <router-link :to="{ name:'home' }">Home</router-link>
-      <router-link :to="{ name:'todo-list' }">Todo List</router-link>
-      <router-link :to="{ name:'todo-create' }">Todo Create</router-link>
-      <!-- <router-link :to="{ name:'todo-edit' ,params:{id:1 }">Todo Edit</router-link> -->
-    </nav>
+    <div class="header">
+      <nav class="navbar">
+        <router-link :to="{ name:'home' }">Home</router-link>
+      </nav>
+    </div>
     <router-view />
   </div>
 </template>
@@ -21,13 +20,17 @@
   text-align: center;
   color: #2c3e50;
 }
-.navbar {
+.header {
   padding: 15px 0;
   background: #ef9a53;
+}
+.navbar {
   a {
     font-weight: 500;
     color: #fff;
     padding: 0px 10px;
+    margin: 0px 10px;
+    background: #ef9a53;
     text-decoration: none;
     letter-spacing: 1.1px;
     &.router-link-exact-active {

@@ -11,20 +11,28 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/todo-list',
-    name: 'todo-list',
-    component: () => import('@/views/todo-localstorage/TodoList.vue')
-  },
-  {
-    path: '/todo-create',
-    name: 'todo-create',
-    component: () => import('@/views/todo-localstorage/TodoCreate.vue')
-  },
-  {
-    path: '/todo-edit/:index/:id',
-    name: 'todo-edit',
-    component: () => import('@/views/todo-localstorage/TodoEdit.vue')
+    path: '/todo-localstorage',
+    name: 'todo-localstorage',
+    component: () => import('@/views/todo-localstorage/TodoHome.vue'),
+    children: [
+      {
+        path: 'todo-list',
+        name: 'todo-list',
+        component: () => import('@/views/todo-localstorage/TodoList.vue')
+      },
+      {
+        path: 'todo-create',
+        name: 'todo-create',
+        component: () => import('@/views/todo-localstorage/TodoCreate.vue')
+      },
+      {
+        path: 'todo-edit/:index/:id',
+        name: 'todo-edit',
+        component: () => import('@/views/todo-localstorage/TodoEdit.vue')
+      }
+    ]
   }
+
 ]
 
 const router = new VueRouter({
