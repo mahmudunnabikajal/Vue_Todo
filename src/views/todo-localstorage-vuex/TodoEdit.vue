@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <AlertToastr :type="this.alertToaster" v-show="alertVisible"></AlertToastr> -->
     <h2>Todo Edit</h2>
     <div class="todo-create flex-center">
       <form @submit.prevent="todoUpdate">
@@ -30,7 +29,6 @@ export default {
     store.getters.todoGet
     this.todoGetEditInfo()
   },
-  components: {},
   computed: {
     ...mapState([
       'todos'

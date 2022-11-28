@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <AlertToastr :type="this.alertToaster" v-show="alertVisible"></AlertToastr> -->
     <h2>Todo Create</h2>
     <div class="todo-create flex-center">
       <form @submit.prevent="todoAdd">
@@ -22,7 +21,6 @@
 <script>
 import store from '@/store'
 import { mapActions } from 'vuex'
-// import AlertToastr from "@/components/AlertToastr.vue"
 export default {
   name: 'TodoCreate',
   data() {

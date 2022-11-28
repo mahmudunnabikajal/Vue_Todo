@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- <AlertToastr :type="this.alertToaster" v-show=""></AlertToastr> -->
     <h2>Todo List</h2>
-    {{ filterStatusTodos }}
     <div class="todo-list flex-center">
       <div class="filter">
         <div class="d-flex">
@@ -16,9 +14,9 @@
         </div>
         <div class="d-flex">
           <p>Search By Exact Title</p>
-          <input class="form-control" list="searchByTitle" type="text" placeholder="Search Here" />
+          <input class="form-control" list="searchByTitle" v-model="$store.state.searchItem" type="text" placeholder="Search Here" @keyup="searchByInput" />
           <datalist id="searchByTitle">
-            <option value></option>
+            <option :value="item.title" v-for="item in filterStatusTodos" :key="item.id">{{ item.title }}</option>
           </datalist>
         </div>
       </div>
@@ -30,14 +28,14 @@
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(item,index) in filterStatusTodos" :key="item.id">
+        <tr v-for="(item,index) in todos" :key="item.id" v-show="filterStatus == item.status || filterStatus == 'All'">
           <td>{{ item.id }}</td>
           <td>{{ item.title }}</td>
           <td>{{ item.comment }}</td>
           <td>{{ item.status }}</td>
           <td>
             <router-link class="btn-edit" :to="{ name:'todo-localstorage-vuex-edit', params:{id:item.id , index:index} }">Edit</router-link>
-            <button class="btn-remove" @click="todoRemove(index)">Remove</button>
+            <button class="btn-remove" @click="todoRemove(index)" v-if="searchItem == ''">Remove</button>
           </td>
         </tr>
         <tr v-if="!filterStatusTodos.length || !todos.length">
@@ -51,7 +49,6 @@
 <script>
 import store from '@/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
-// import AlertToastr from "@/components/AlertToastr.vue"
 export default {
   name: 'TodoList',
   data() {
@@ -63,7 +60,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'todos', 'filterStatusTodos'
+      'todos', 'filterStatusTodos', 'filterStatus', 'searchItem'
     ]),
     ...mapGetters([
       'todoGetEditInfo'
@@ -75,6 +72,9 @@ export default {
     ]),
     filterStatusTodoGet() {
       store.getters.filterStatusTodoGet
+    },
+    searchByInput() {
+      store.getters.searchByInput
     }
   }
 }

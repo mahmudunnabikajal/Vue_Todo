@@ -22,7 +22,7 @@ export default new Vuex.Store({
     },
     filterStatus: 'All',
     filterStatusTodos: [],
-    searchItem: '',
+    searchItem: ''
   },
   getters: {
     todoGet(state) {
@@ -31,17 +31,21 @@ export default new Vuex.Store({
     filterStatusTodoGet(state) {
       if (state.filterStatus == 'All') {
         state.filterStatusTodos = state.todos
-        console.log(state.filterStatusTodos)
-
       }
       else {
         state.filterStatusTodos = state.todos.filter(item => {
           return item.status == state.filterStatus
         })
-        console.log(state.filterStatusTodos)
-
       }
-    }
+    },
+    searchByInput(state) {
+      state.todos = JSON.parse(localStorage.getItem('todolist-vuex'))
+      if (state.searchItem != "" && state.todos) {
+        state.todos = state.todos.filter(item => {
+          return item.title == state.searchItem
+        })
+      }
+    },
   },
   mutations: {
     TODO_ADD(state) {
