@@ -63,6 +63,7 @@ export default {
   },
   components: { AlertToastr },
   created() {
+    this.todoInit()
     this.todoGet()
     this.filterStatusItem()
   },
@@ -79,6 +80,11 @@ export default {
       this.todos.splice(item, 1);
       this.todoSubmit()
       this.alertInit("success")
+    },
+    todoInit() {
+      if (localStorage.getItem("todolist") == null) {
+        this.todoSubmit()
+      }
     },
     todoSubmit() {
       let newTodoStringify = JSON.stringify(this.todos);

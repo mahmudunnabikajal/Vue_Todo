@@ -12,11 +12,15 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   name: 'TodoHome',
   data() {
     return {
     }
+  },
+  created() {
+    store.getters.todoInit
   },
   components: {},
   methods: {

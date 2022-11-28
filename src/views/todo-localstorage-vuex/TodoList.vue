@@ -63,7 +63,7 @@ export default {
       'todos', 'filterStatusTodos', 'filterStatus', 'searchItem'
     ]),
     ...mapGetters([
-      'todoGetEditInfo'
+      'todoGetEditInfo',
     ])
   },
   methods: {

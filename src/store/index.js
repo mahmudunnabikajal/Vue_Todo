@@ -25,6 +25,13 @@ export default new Vuex.Store({
     searchItem: ''
   },
   getters: {
+    todoInit(state) {
+      if (localStorage.getItem("todolist-vuex") == null) {
+        let newTodoStringify = JSON.stringify(state.todos)
+        localStorage.setItem('todolist-vuex', newTodoStringify)
+        console.log('ok')
+      }
+    },
     todoGet(state) {
       return state.todos = JSON.parse(localStorage.getItem('todolist-vuex'))
     },
