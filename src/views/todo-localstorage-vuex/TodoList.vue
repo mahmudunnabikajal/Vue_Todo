@@ -1,12 +1,12 @@
 <template>
   <div>
-    <AlertToastr :type="this.alertToaster" v-show="alertVisible"></AlertToastr>
+    <!-- <AlertToastr :type="this.alertToaster" v-show=""></AlertToastr> -->
     <h2>Todo List</h2>
     <div class="todo-list flex-center">
       <div class="filter">
         <div class="d-flex">
           <p>Filter by Status</p>
-          <select class="form-control" @change="filterStatusItem()" v-model="filterStatus" required>
+          <select class="form-control" required>
             <option value="All">All</option>
             <option value="Pending">Pending</option>
             <option value="Running">Running</option>
@@ -15,9 +15,9 @@
         </div>
         <div class="d-flex">
           <p>Search By Exact Title</p>
-          <input class="form-control" list="searchByTitle" type="text" v-model="searchItem" placeholder="Search Here" @keyup="searchByInput()" />
+          <input class="form-control" list="searchByTitle" type="text" placeholder="Search Here" />
           <datalist id="searchByTitle">
-            <option :value="item.title" v-for="item in filterStatusTodos" :key="item.id">{{ item.title }}</option>
+            <option value></option>
           </datalist>
         </div>
       </div>
@@ -29,17 +29,17 @@
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(item,index) in todos" :key="index" v-show="filterStatus == item.status || filterStatus == 'All'">
-          <td>{{item.id}}</td>
-          <td>{{item.title}}</td>
-          <td>{{item.comment}}</td>
-          <td>{{item.status}}</td>
+        <tr v-for="(item,index) in todos" :key="item.id">
+          <td>{{ item.id }}</td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.comment }}</td>
+          <td>{{ item.status }}</td>
           <td>
             <router-link class="btn-edit" :to="{ name:'todo-localstorage-vuex-edit', params:{id:item.id , index:index} }">Edit</router-link>
-            <button class="btn-remove" @click="todoRemove(index)" v-if="searchItem == ''">Remove</button>
+            <button class="btn-remove" @click="todoRemove(index)">Remove</button>
           </td>
         </tr>
-        <tr v-if="!filterStatusTodos.length || !this.todos.length">
+        <tr>
           <td colspan="5">No Data Found</td>
         </tr>
       </table>
@@ -48,59 +48,29 @@
 </template>
 
 <script>
-import AlertToastr from "@/components/AlertToastr.vue"
+import store from '@/store'
+import { mapState, mapActions, mapGetters } from 'vuex'
+// import AlertToastr from "@/components/AlertToastr.vue"
 export default {
   name: 'TodoList',
   data() {
-    return {
-      todos: [],
-      filterStatus: "All",
-      filterStatusTodos: [],
-      searchItem: '',
-      alertToaster: null,
-      alertVisible: true
-    }
+    return {}
   },
-  components: { AlertToastr },
   created() {
-    this.todoGet()
-    this.filterStatusItem()
+    store.getters.todoGet
+  },
+  computed: {
+    ...mapState([
+      'todos'
+    ]),
+    ...mapGetters([
+      'todoGetEditInfo'
+    ])
   },
   methods: {
-    alertInit(status) {
-      this.alertToaster = status
-      setTimeout(() => this.alertVisible = false, 2000)
-      this.alertVisible = true
-    },
-    todoGet() {
-      this.todos = JSON.parse(localStorage.getItem("todolist"));
-    },
-    todoRemove(item) {
-      this.todos.splice(item, 1);
-      this.todoSubmit()
-      this.alertInit("success")
-    },
-    todoSubmit() {
-      let newTodoStringify = JSON.stringify(this.todos);
-      localStorage.setItem("todolist", newTodoStringify);
-    },
-    searchByInput() {
-      this.todoGet()
-      if (this.searchItem != "" && this.todos) {
-        this.todos = this.todos.filter(item => {
-          return item.title == this.searchItem
-        })
-      }
-    },
-    filterStatusItem() {
-      if (this.filterStatus == 'All') {
-        this.filterStatusTodos = this.todos
-      } else {
-        this.filterStatusTodos = this.todos.filter(item => {
-          return item.status == this.filterStatus
-        })
-      }
-    }
+    ...mapActions([
+      'todoRemove'
+    ])
   }
 }
 </script>
