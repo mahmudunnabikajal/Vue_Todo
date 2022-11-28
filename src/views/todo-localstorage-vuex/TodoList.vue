@@ -2,11 +2,12 @@
   <div>
     <!-- <AlertToastr :type="this.alertToaster" v-show=""></AlertToastr> -->
     <h2>Todo List</h2>
+    {{ filterStatusTodos }}
     <div class="todo-list flex-center">
       <div class="filter">
         <div class="d-flex">
           <p>Filter by Status</p>
-          <select class="form-control" required>
+          <select class="form-control" @change="this.filterStatusTodoGet" v-model="$store.state.filterStatus" required>
             <option value="All">All</option>
             <option value="Pending">Pending</option>
             <option value="Running">Running</option>
@@ -29,7 +30,7 @@
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(item,index) in todos" :key="item.id">
+        <tr v-for="(item,index) in filterStatusTodos" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.title }}</td>
           <td>{{ item.comment }}</td>
@@ -39,7 +40,7 @@
             <button class="btn-remove" @click="todoRemove(index)">Remove</button>
           </td>
         </tr>
-        <tr>
+        <tr v-if="!filterStatusTodos.length || !todos.length">
           <td colspan="5">No Data Found</td>
         </tr>
       </table>
@@ -58,10 +59,11 @@ export default {
   },
   created() {
     store.getters.todoGet
+    store.getters.filterStatusTodoGet
   },
   computed: {
     ...mapState([
-      'todos'
+      'todos', 'filterStatusTodos'
     ]),
     ...mapGetters([
       'todoGetEditInfo'
@@ -70,7 +72,10 @@ export default {
   methods: {
     ...mapActions([
       'todoRemove'
-    ])
+    ]),
+    filterStatusTodoGet() {
+      store.getters.filterStatusTodoGet
+    }
   }
 }
 </script>

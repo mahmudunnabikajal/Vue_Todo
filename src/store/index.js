@@ -19,11 +19,28 @@ export default new Vuex.Store({
       title: null,
       comment: null,
       status: "Pending",
-    }
+    },
+    filterStatus: 'All',
+    filterStatusTodos: [],
+    searchItem: '',
   },
   getters: {
     todoGet(state) {
       return state.todos = JSON.parse(localStorage.getItem('todolist-vuex'))
+    },
+    filterStatusTodoGet(state) {
+      if (state.filterStatus == 'All') {
+        state.filterStatusTodos = state.todos
+        console.log(state.filterStatusTodos)
+
+      }
+      else {
+        state.filterStatusTodos = state.todos.filter(item => {
+          return item.status == state.filterStatus
+        })
+        console.log(state.filterStatusTodos)
+
+      }
     }
   },
   mutations: {
