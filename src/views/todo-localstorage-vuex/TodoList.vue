@@ -28,13 +28,13 @@
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(item,index) in todos" :key="item.id" v-show="filterStatus == item.status || filterStatus == 'All'">
+        <tr v-for="(item, index) in todos" :key="item.id" v-show="filterStatus == item.status || filterStatus == 'All'">
           <td>{{ item.id }}</td>
           <td>{{ item.title }}</td>
           <td>{{ item.comment }}</td>
           <td>{{ item.status }}</td>
           <td>
-            <router-link class="btn-edit" :to="{ name:'todo-localstorage-vuex-edit', params:{id:item.id , index:index} }">Edit</router-link>
+            <router-link class="btn-edit" :to="{ name: 'todo-localstorage-vuex-edit', params: { id: item.id, index: index } }">Edit</router-link>
             <button class="btn-remove" @click="todoRemove(index)" v-if="searchItem == ''">Remove</button>
           </td>
         </tr>
@@ -47,37 +47,31 @@
 </template>
 
 <script>
-import store from '@/store'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import store from "@/store";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
-  name: 'TodoList',
+  name: "TodoList",
   data() {
-    return {}
+    return {};
   },
   created() {
-    store.getters.todoGet
-    store.getters.filterStatusTodoGet
+    store.getters.todoGet;
+    store.getters.filterStatusTodoGet;
   },
   computed: {
-    ...mapState([
-      'todos', 'filterStatusTodos', 'filterStatus', 'searchItem'
-    ]),
-    ...mapGetters([
-      'todoGetEditInfo',
-    ])
+    ...mapState(["todos", "filterStatusTodos", "filterStatus", "searchItem"]),
+    ...mapGetters(["todoGetEditInfo"]),
   },
   methods: {
-    ...mapActions([
-      'todoRemove'
-    ]),
+    ...mapActions(["todoRemove"]),
     filterStatusTodoGet() {
-      store.getters.filterStatusTodoGet
+      store.getters.filterStatusTodoGet;
     },
     searchByInput() {
-      store.getters.searchByInput
-    }
-  }
-}
+      store.getters.searchByInput;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

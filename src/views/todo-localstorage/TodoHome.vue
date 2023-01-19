@@ -3,8 +3,8 @@
     <h2>Todo With Localstorage</h2>
     <div class="todo-home">
       <nav class="navbar">
-        <router-link :to="{ name:'todo-list' }">Todo List</router-link>
-        <router-link :to="{ name:'todo-create' }">Todo Create</router-link>
+        <router-link :to="{ name: 'todo-list' }">Todo List</router-link>
+        <router-link :to="{ name: 'todo-create' }">Todo Create</router-link>
       </nav>
       <router-view></router-view>
     </div>
@@ -13,13 +13,11 @@
 
 <script>
 export default {
-  name: 'TodoHome',
+  name: "TodoHome",
   data() {
-    return {
-    }
+    return {};
   },
   components: {},
-  methods: {
-  }
-}
+  methods: {},
+};
 </script>

@@ -19,22 +19,19 @@
 </template>
 
 <script>
-import store from '@/store'
-import { mapActions } from 'vuex'
+import store from "@/store";
+import { mapActions } from "vuex";
 export default {
-  name: 'TodoCreate',
+  name: "TodoCreate",
   data() {
-    return {}
+    return {};
   },
   created() {
-    store.getters.todoGet
+    store.getters.todoGet;
   },
   methods: {
-    ...mapActions([
-      'todoAdd'
-    ])
-  }
-}
+    ...mapActions(["todoAdd"]),
+  },
+};
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
